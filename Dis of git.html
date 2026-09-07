@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Smart — Digestive System Disorders</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEEDE3;
+    --paper-2:#F7F6F0;
+    --ink:#20241E;
+    --ink-soft:#4B5049;
+    --accent:#8B3A2B;
+    --accent-soft:#C97E63;
+    --teal:#3E6259;
+    --teal-soft:#DCE7E2;
+    --line:#D6D2C2;
+    --card:#FFFFFF;
+    --good:#3E6259;
+    --bad:#8B3A2B;
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'IBM Plex Sans',sans-serif;
+    line-height:1.55;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:38px 38px;
+    background-position:-1px -1px;
+  }
+  h1,h2,h3,h4{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    margin:0 0 .4em 0;
+    color:var(--ink);
+  }
+  p{margin:.3em 0 .7em 0;}
+  ::selection{background:var(--accent-soft); color:#fff;}
+
+  /* ---------- Header ---------- */
+  header.top{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    padding:34px clamp(18px,4vw,52px) 18px clamp(18px,4vw,52px);
+    border-bottom:2px solid var(--ink);
+    flex-wrap:wrap;
+    gap:10px;
+  }
+  header.top .brand{max-width:620px;}
+  header.top .brand .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    letter-spacing:.04em;
+    color:var(--accent);
+    margin-bottom:6px;
+  }
+  header.top h1{
+    font-size:clamp(30px,4.4vw,50px);
+    line-height:1.02;
+    letter-spacing:-.01em;
+  }
+  header.top .sub{
+    font-size:15px;
+    color:var(--ink-soft);
+    max-width:520px;
+  }
+  header.top .badge{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    text-align:right;
+    border-left:1px solid var(--line);
+    padding-left:16px;
+  }
+
+  /* ---------- Layout ---------- */
+  .shell{
+    display:grid;
+    grid-template-columns:220px 1fr;
+    min-height:70vh;
+  }
+  nav.tabs{
+    border-right:2px solid var(--ink);
+    padding:22px 0;
+  }
+  nav.tabs button{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:none;
+    border:none;
+    border-left:4px solid transparent;
+    font-family:'IBM Plex Sans',sans-serif;
+    font-size:15px;
+    font-weight:600;
+    color:var(--ink-soft);
+    padding:14px 20px 14px 18px;
+    cursor:pointer;
+    position:relative;
+    transition:background .15s ease, color .15s ease, border-color .15s ease;
+  }
+  nav.tabs button .n{
+    font-family:'IBM Plex Mono',monospace;
+    font-weight:500;
+    font-size:11px;
+    color:var(--accent);
+    display:block;
+    margin-bottom:3px;
+    letter-spacing:.03em;
+  }
+  nav.tabs button:hover{background:var(--paper-2); color:var(--ink);}
+  nav.tabs button.active{
+    background:var(--card);
+    color:var(--ink);
+    border-left:4px solid var(--accent);
+  }
+
+  main{padding:clamp(20px,3.4vw,44px);}
+  section.pane{display:none; animation:fade .25s ease;}
+  section.pane.active{display:block;}
+  @keyframes fade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:none;} }
+
+  section.pane > .intro{max-width:680px; margin-bottom:26px;}
+  section.pane > .intro h2{font-size:clamp(24px,3vw,32px);}
+  section.pane > .intro .lede{color:var(--ink-soft); font-size:15px;}
+
+  /* ---------- Overview ---------- */
+  .law-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    gap:14px;
+  }
+  .law-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-top:3px solid var(--teal);
+    padding:16px 18px;
+  }
+  .law-card h3{font-size:16px; margin-bottom:8px;}
+  .law-card ul{margin:0; padding-left:18px;}
+  .law-card li{font-size:13.5px; margin-bottom:4px; color:var(--ink);}
+  .law-card li b{color:var(--accent);}
+
+  /* ---------- Diagrams ---------- */
+  .diagram-block{
+    background:var(--card);
+    border:1px solid var(--line);
+    padding:20px 22px;
+    margin-bottom:22px;
+  }
+  .diagram-block h3{font-size:18px; margin-bottom:2px;}
+  .diagram-block .hint{
+    font-size:12.5px; color:var(--ink-soft); margin-bottom:14px;
+    font-family:'IBM Plex Mono',monospace;
+  }
+
+  /* balance widget */
+  .balance-wrap{display:flex; gap:16px; flex-wrap:wrap;}
+  .balance-col{flex:1; min-width:220px;}
+  .balance-col h4{font-size:13px; text-transform:none; margin-bottom:8px; color:var(--ink-soft); font-family:'IBM Plex Sans'; font-weight:600;}
+  .chip{
+    display:inline-block;
+    margin:0 6px 8px 0;
+    padding:7px 12px;
+    border:1px solid var(--line);
+    background:var(--paper-2);
+    font-size:13px;
+    cursor:pointer;
+    border-radius:var(--radius);
+    transition:.15s;
+  }
+  .chip.aggr:hover, .chip.aggr.on{background:var(--accent); color:#fff; border-color:var(--accent);}
+  .chip.def:hover, .chip.def.on{background:var(--teal); color:#fff; border-color:var(--teal);}
+  .reveal-box{
+    margin-top:10px;
+    padding:12px 14px;
+    background:var(--paper-2);
+    border-left:3px solid var(--accent);
+    font-size:13.5px;
+    min-height:20px;
+  }
+
+  /* flow widget */
+  .flow{display:flex; align-items:center; flex-wrap:wrap; gap:6px; margin-bottom:10px;}
+  .flow .node{
+    padding:10px 14px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    font-size:13px;
+    cursor:pointer;
+    text-align:center;
+  }
+  .flow .node:hover{border-color:var(--teal);}
+  .flow .node.blocked{border:1px dashed var(--accent); color:var(--accent);}
+  .flow .arrow{font-family:'IBM Plex Mono',monospace; color:var(--ink-soft);}
+
+  /* stepper */
+  .stepper{display:flex; flex-wrap:wrap; gap:0; margin-bottom:12px;}
+  .step{
+    flex:1; min-width:150px;
+    padding:12px 14px;
+    background:var(--paper-2);
+    border:1px solid var(--line);
+    border-left:none;
+    cursor:pointer;
+    font-size:13px;
+    position:relative;
+  }
+  .step:first-child{border-left:1px solid var(--line);}
+  .step .num{font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--accent); display:block; margin-bottom:4px;}
+  .step.on{background:var(--teal); color:#fff;}
+  .step.on .num{color:#F4EDE3;}
+
+  /* table */
+  table.cmp{width:100%; border-collapse:collapse; font-size:13.5px;}
+  table.cmp th{
+    text-align:left; font-family:'IBM Plex Mono',monospace; font-weight:500; font-size:11.5px;
+    color:var(--ink-soft); padding:8px 10px; border-bottom:2px solid var(--ink);
+  }
+  table.cmp td{padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top;}
+  table.cmp tr{cursor:pointer;}
+  table.cmp tr:hover td{background:var(--paper-2);}
+  table.cmp tr.on td{background:var(--teal-soft);}
+  table.cmp td.feat{font-weight:600;}
+
+  /* ---------- Mini map ---------- */
+  .mm-wrap{display:grid; grid-template-columns:260px 1fr; gap:0; border:1px solid var(--line); min-height:420px;}
+  .mm-list{border-right:1px solid var(--line); padding:6px 0; max-height:560px; overflow-y:auto;}
+  .mm-list button{
+    display:block; width:100%; text-align:left; background:none; border:none;
+    border-bottom:1px solid var(--line);
+    padding:12px 16px; font-size:13.5px; font-family:'IBM Plex Sans'; color:var(--ink);
+    cursor:pointer;
+  }
+  .mm-list button:hover{background:var(--paper-2);}
+  .mm-list button.on{background:var(--teal); color:#fff; font-weight:600;}
+  .mm-panel{padding:26px 28px; background:var(--card);}
+  .mm-panel h3{font-size:20px; margin-bottom:10px;}
+  .mm-panel p{font-size:14.5px; color:var(--ink);}
+  .mm-empty{color:var(--ink-soft); font-size:14px; font-style:italic;}
+
+  /* ---------- Flashcards ---------- */
+  .fc-toolbar{display:flex; align-items:center; gap:12px; margin-bottom:16px; flex-wrap:wrap;}
+  .fc-toolbar .count{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);
+  }
+  button.btn{
+    font-family:'IBM Plex Sans'; font-size:13px; font-weight:600;
+    background:var(--ink); color:#fff; border:none; padding:9px 16px; cursor:pointer;
+  }
+  button.btn:hover{background:var(--accent);}
+  button.btn.ghost{background:none; color:var(--ink); border:1px solid var(--line);}
+  button.btn.ghost:hover{border-color:var(--ink);}
+
+  .fc-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(230px,1fr));
+    gap:14px;
+  }
+  .fc-card{
+    perspective:1200px;
+    height:150px;
+    cursor:pointer;
+  }
+  .fc-inner{
+    position:relative; width:100%; height:100%;
+    transform-style:preserve-3d;
+    transition:transform .5s cubic-bezier(.4,.2,.2,1);
+  }
+  .fc-card.flipped .fc-inner{transform:rotateY(180deg);}
+  .fc-face{
+    position:absolute; inset:0;
+    backface-visibility:hidden;
+    border:1px solid var(--line);
+    padding:14px;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-size:13.5px;
+  }
+  .fc-front{background:var(--card);}
+  .fc-front .tag{
+    position:absolute; top:8px; left:10px;
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--accent);
+  }
+  .fc-back{background:var(--teal); color:#fff; transform:rotateY(180deg);}
+
+  /* ---------- Quiz ---------- */
+  .quiz-toolbar{
+    display:flex; align-items:center; justify-content:space-between; gap:14px;
+    margin-bottom:18px; flex-wrap:wrap;
+    padding:14px 18px;
+    background:var(--card); border:1px solid var(--line);
+  }
+  .score{font-family:'IBM Plex Mono',monospace; font-size:14px;}
+  .score b{color:var(--accent); font-size:16px;}
+  .q-item{
+    background:var(--card); border:1px solid var(--line);
+    padding:16px 18px; margin-bottom:12px;
+  }
+  .q-item .q-head{display:flex; gap:10px; margin-bottom:10px;}
+  .q-item .q-num{font-family:'IBM Plex Mono',monospace; color:var(--accent); font-size:13px;}
+  .q-item .q-text{font-size:14.5px; font-weight:600;}
+  .q-opts{display:grid; gap:8px;}
+  .q-opt{
+    text-align:left; padding:10px 12px; border:1px solid var(--line); background:var(--paper-2);
+    font-size:13.5px; cursor:pointer; font-family:'IBM Plex Sans';
+  }
+  .q-opt:hover{border-color:var(--teal);}
+  .q-opt.correct{background:var(--teal-soft); border-color:var(--teal); font-weight:600;}
+  .q-opt.wrong{background:#F3E1DC; border-color:var(--accent);}
+  .q-opt[disabled]{cursor:default;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;
+    padding:22px 12px 30px 12px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12px;
+    color:var(--ink-soft);
+    border-top:1px solid var(--line);
+  }
+
+  @media (max-width:760px){
+    .shell{grid-template-columns:1fr;}
+    nav.tabs{
+      display:flex; overflow-x:auto; border-right:none; border-bottom:2px solid var(--ink);
+      padding:8px 6px;
+    }
+    nav.tabs button{width:auto; white-space:nowrap; border-left:none; border-bottom:4px solid transparent;}
+    nav.tabs button.active{border-left:none; border-bottom:4px solid var(--accent);}
+    .mm-wrap{grid-template-columns:1fr;}
+    .mm-list{border-right:none; border-bottom:1px solid var(--line); max-height:220px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="brand">
+    <div class="kicker">GASTROINTESTINAL PATHOLOGY · REVISION TOOL</div>
+    <h1>Study Smart</h1>
+    <div class="sub">Disorders of the digestive system, organized for revision: the essential rules, the mechanisms drawn out, and enough practice to know it cold.</div>
+  </div>
+  <div class="badge">5 sections<br>Oral cavity → Appendix</div>
+</header>
+
+<div class="shell">
+  <nav class="tabs">
+    <button class="tab-btn active" data-pane="overview"><span class="n">01</span>Overview</button>
+    <button class="tab-btn" data-pane="diagrams"><span class="n">02</span>Diagrams</button>
+    <button class="tab-btn" data-pane="minimap"><span class="n">03</span>Mini Map</button>
+    <button class="tab-btn" data-pane="flashcards"><span class="n">04</span>Flash Cards</button>
+    <button class="tab-btn" data-pane="quiz"><span class="n">05</span>Quiz Bank</button>
+  </nav>
+
+  <main>
+
+    <!-- ============ OVERVIEW ============ -->
+    <section class="pane active" id="overview">
+      <div class="intro">
+        <h2>The rules, not the lecture</h2>
+        <p class="lede">One card per topic. Just the facts worth remembering on exam day.</p>
+      </div>
+      <div class="law-grid" id="lawGrid"></div>
+    </section>
+
+    <!-- ============ DIAGRAMS ============ -->
+    <section class="pane" id="diagrams">
+      <div class="intro">
+        <h2>Mechanisms, worked out by hand</h2>
+        <p class="lede">Click any chip, node, step, or row to reveal what it means.</p>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Peptic ulcer: the balance that decides</h3>
+        <div class="hint">click a factor on either side</div>
+        <div class="balance-wrap">
+          <div class="balance-col">
+            <h4>Aggressive factors</h4>
+            <span class="chip aggr" data-txt="H. pylori damages mucosa directly (urease, proteases, phospholipases) and triggers a strong local inflammatory response.">Helicobacter pylori</span>
+            <span class="chip aggr" data-txt="Alcohol strips the protective mucous layer and irritates the epithelium directly.">Alcohol intake</span>
+            <span class="chip aggr" data-txt="NSAIDs and aspirin block cyclooxygenase, cutting protective prostaglandin production; aspirin is also a direct mucosal irritant.">NSAIDs, aspirin</span>
+            <span class="chip aggr" data-txt="Smoking impairs mucosal blood flow and healing, and worsens the effect of other risk factors.">Smoking</span>
+            <span class="chip aggr" data-txt="Acid and pepsin are the actual agents of digestion — vital to ulcer formation once defenses are breached.">Peptic acid secretion</span>
+            <span class="chip aggr" data-txt="Bile refluxing back into the stomach is itself corrosive to gastric mucosa.">Bile reflux</span>
+          </div>
+          <div class="balance-col">
+            <h4>Defending factors</h4>
+            <span class="chip def" data-txt="A continuous mucus and bicarbonate layer keeps the epithelial surface at a near-neutral pH despite the acidic lumen.">Mucus and bicarbonate</span>
+            <span class="chip def" data-txt="A rich capillary network supplies oxygen and buffers acid that leaks through the mucus layer.">Blood flow</span>
+            <span class="chip def" data-txt="Nitric oxide and prostaglandins maintain blood flow and stimulate mucus/bicarbonate output.">Nitric oxide, prostaglandins</span>
+            <span class="chip def" data-txt="Rapid replacement of damaged epithelial cells keeps the barrier intact.">Growth factor & cell renewal</span>
+            <span class="chip def" data-txt="Antioxidants neutralize free radicals generated during inflammation, limiting tissue damage.">Antioxidant defense</span>
+          </div>
+        </div>
+        <div class="reveal-box" id="balanceReveal">Select a factor to read what it does.</div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Drug-induced ulcers: where the drugs intervene</h3>
+        <div class="hint">click a step in the pathway</div>
+        <div class="flow" id="drugFlow">
+          <div class="node" data-txt="The pathway starts at the phospholipid bilayer of the cell membrane." data-t="Plasma membrane">Plasma membrane</div>
+          <span class="arrow">→</span>
+          <div class="node blocked" data-txt="Corticosteroids block phospholipase A2, the enzyme that releases arachidonic acid from the membrane — cutting the pathway off at its source." data-t="Phospholipase A2 (blocked by corticosteroids)">Phospholipase A2</div>
+          <span class="arrow">→</span>
+          <div class="node" data-txt="Arachidonic acid is the substrate for prostaglandin synthesis." data-t="Arachidonic acid">Arachidonic acid</div>
+          <span class="arrow">→</span>
+          <div class="node blocked" data-txt="NSAIDs and aspirin inhibit cyclooxygenase (COX), the enzyme that converts arachidonic acid into prostaglandins." data-t="Cyclooxygenase / COX (blocked by NSAIDs, aspirin)">Cyclooxygenase (COX)</div>
+          <span class="arrow">→</span>
+          <div class="node" data-txt="Prostaglandins are gastroprotective: they raise mucus and bicarbonate output and lower acid secretion. Cut this pathway, and peptic ulceration follows." data-t="Prostaglandin → gastroprotection">Prostaglandin</div>
+        </div>
+        <div class="reveal-box" id="drugReveal">Select a step to read what it does.</div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>How H. pylori actually damages the mucosa</h3>
+        <div class="hint">click each mechanism</div>
+        <div class="stepper" id="hpSteps">
+          <div class="step on" data-i="0"><span class="num">1</span>Cytokine-driven inflammation</div>
+          <div class="step" data-i="1"><span class="num">2</span>Direct toxin damage</div>
+          <div class="step" data-i="2"><span class="num">3</span>Acid–bicarbonate imbalance</div>
+          <div class="step" data-i="3"><span class="num">4</span>Vascular occlusion</div>
+        </div>
+        <div class="reveal-box" id="hpReveal"></div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Barrett's esophagus: the road to adenocarcinoma</h3>
+        <div class="hint">click each stage</div>
+        <div class="stepper" id="barrettSteps">
+          <div class="step on" data-i="0"><span class="num">1</span>Chronic reflux</div>
+          <div class="step" data-i="1"><span class="num">2</span>Barrett epithelium</div>
+          <div class="step" data-i="2"><span class="num">3</span>Dysplasia</div>
+          <div class="step" data-i="3"><span class="num">4</span>Carcinoma in situ</div>
+          <div class="step" data-i="4"><span class="num">5</span>Adenocarcinoma</div>
+        </div>
+        <div class="reveal-box" id="barrettReveal"></div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Crohn's disease vs. ulcerative colitis</h3>
+        <div class="hint">click a row to compare</div>
+        <table class="cmp" id="cmpTable">
+          <thead><tr><th>Feature</th><th>Crohn's disease</th><th>Ulcerative colitis</th></tr></thead>
+          <tbody></tbody>
+        </table>
+        <div class="reveal-box" id="cmpReveal">Select a feature to see why it differs.</div>
+      </div>
+
+      <div class="diagram-block">
+        <h3>Small intestinal obstruction: what's blocking it</h3>
+        <div class="hint">click a cause</div>
+        <div class="balance-wrap">
+          <div class="balance-col" style="flex:2;">
+            <span class="chip def" data-txt="A defect in the peritoneal wall lets a loop of bowel protrude into a hernia sac, where it can become trapped and obstructed.">Hernia</span>
+            <span class="chip def" data-txt="Fibrous bands from prior surgery or inflammation can kink or trap a loop of bowel.">Adhesions</span>
+            <span class="chip def" data-txt="One segment of bowel telescopes into the segment immediately ahead of it, blocking the lumen.">Intussusception</span>
+            <span class="chip def" data-txt="A loop of bowel twists on its mesentery, obstructing the lumen and choking off its own blood supply.">Volvulus</span>
+            <span class="chip aggr" data-txt="Tumors and vascular infarction account for a smaller share (about 20%) of obstruction, more often outside the four mechanical causes above.">Tumor / infarction</span>
+          </div>
+        </div>
+        <div class="reveal-box" id="obsReveal">About 80% of small-bowel obstruction comes from the four mechanical causes on the left; select one.</div>
+      </div>
+    </section>
+
+    <!-- ============ MINI MAP ============ -->
+    <section class="pane" id="minimap">
+      <div class="intro">
+        <h2>Every topic, one tap away</h2>
+        <p class="lede">Click a title on the left. The full note opens on the right.</p>
+      </div>
+      <div class="mm-wrap">
+        <div class="mm-list" id="mmList"></div>
+        <div class="mm-panel" id="mmPanel">
+          <p class="mm-empty">Choose a topic to read its notes here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FLASHCARDS ============ -->
+    <section class="pane" id="flashcards">
+      <div class="intro">
+        <h2>Flash cards</h2>
+        <p class="lede">Tap a card to flip it. Shuffle when you want a fresh order.</p>
+      </div>
+      <div class="fc-toolbar">
+        <button class="btn" id="shuffleBtn">Shuffle deck</button>
+        <button class="btn ghost" id="flipAllBtn">Flip all</button>
+        <span class="count" id="fcCount"></span>
+      </div>
+      <div class="fc-grid" id="fcGrid"></div>
+    </section>
+
+    <!-- ============ QUIZ ============ -->
+    <section class="pane" id="quiz">
+      <div class="intro">
+        <h2>Quiz bank</h2>
+        <p class="lede">Answer positions are shuffled fresh every time you load the page.</p>
+      </div>
+      <div class="quiz-toolbar">
+        <div class="score">Score: <b id="scoreVal">0</b> / <span id="scoreTotal">0</span></div>
+        <button class="btn ghost" id="resetQuizBtn">Reset quiz</button>
+      </div>
+      <div id="quizList"></div>
+    </section>
+
+  </main>
+</div>
+
+<footer>© Anmar Taha. All rights reserved.</footer>
+
+<script>
+/* ===================== TAB NAVIGATION ===================== */
+document.querySelectorAll('.tab-btn').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.pane).classList.add('active');
+  });
+});
+
+/* ===================== SHARED CONTENT DATA ===================== */
+const topics = [
+  {
+    title:"Stomatitis & aphthous ulcers",
+    laws:[
+      "Stomatitis = inflammation of the oral mucous membrane; occurs in the course of several different diseases.",
+      "<b>Aphthous ulcers</b> are the commonest form of oral ulceration.",
+      "Painful oral ulcers, <b>1 cm or more</b> in size.",
+      "Causes: unknown, emotional stress, allergy, hormonal imbalance, nutritional deficiency, GI disturbance, trauma."
+    ],
+    text:"Stomatitis is inflammation of the mucous membrane of the mouth and can occur in the course of several different underlying diseases. The commonest form of oral ulceration is the aphthous ulcer: a painful ulcer, 1 cm or more in size. The cause is often unknown, but recognized contributors include emotional stress, allergy, hormonal imbalance, nutritional deficiencies, gastrointestinal disturbances, and trauma."
+  },
+  {
+    title:"Oral fungal infections & terminology",
+    laws:[
+      "Fungal infections commonly involving oral mucosa: <b>candidiasis</b> and <b>actinomycosis</b>.",
+      "Glossitis = inflammation of the tongue.",
+      "Gingivitis = inflammation of the gums.",
+      "Pharyngitis = inflammation of the back of the mouth/throat."
+    ],
+    text:"The fungal infections that most commonly involve the oral mucosa are candidiasis and actinomycosis. A short vocabulary is worth memorizing: inflammation of the tongue is glossitis, inflammation of the gums is gingivitis, and inflammation of the back of the mouth is pharyngitis."
+  },
+  {
+    title:"Esophagitis & GERD",
+    laws:[
+      "Esophagitis occurs most commonly from <b>reflux</b> (GERD), though infections and other conditions can also cause it.",
+      "Reflux can happen in normal healthy people after heavy meals and in early pregnancy.",
+      "Disease occurs when reflux becomes <b>excessive</b>, inflaming the lower esophagus.",
+      "Predisposing conditions: sliding hiatus hernia, chronic gastric/duodenal ulcer, NG intubation, persistent vomiting, CNS depressants (alcohol).",
+      "The action of <b>gastric juice</b> is vital to the development of esophageal mucosal injury."
+    ],
+    text:"Inflammation of the esophagus (esophagitis) occurs most commonly from reflux, although other clinical conditions and infections can also cause it. Reflux (peptic) esophagitis / GERD is the single most important cause: it is associated with reflux of gastric juice into the lower esophagus. Gastro-esophageal reflux can occur in normal healthy individuals after heavy meals and in early pregnancy, but disease occurs when the reflux becomes excessive, resulting in inflammation of the lower esophagus. Predisposing conditions include sliding hiatus hernia, chronic gastric and duodenal ulcers, nasogastric intubation, persistent vomiting, and central nervous system depressants such as alcohol. The action of gastric juice itself is vital to the development of the resulting mucosal injury."
+  },
+  {
+    title:"Barrett's esophagus",
+    laws:[
+      "Definition: stratified squamous epithelium of the lower esophagus replaced by <b>columnar epithelium</b> (columnar metaplasia) following reflux esophagitis.",
+      "Seen more commonly in <b>old age</b>; caused by factors producing GERD.",
+      "It is a <b>premalignant</b> condition.",
+      "Sequence: Barrett epithelium (columnar metaplasia with goblet cells) → dysplasia → carcinoma in situ → <b>esophageal adenocarcinoma</b>.",
+      "Pathogenesis: a change in the differentiation program of the esophageal mucosal stem cell (intestinal metaplasia with goblet cells)."
+    ],
+    text:"Barrett's esophagus is a condition in which, following reflux esophagitis, the stratified squamous epithelium of the lower esophagus is replaced by columnar epithelium (columnar metaplasia). It is seen more commonly in old age and is caused by the same factors that produce gastro-esophageal reflux disease. Barrett's esophagus is a premalignant condition, evolving sequentially from Barrett's epithelium (columnar metaplasia with goblet cells) to dysplasia, to carcinoma in situ, and finally to esophageal adenocarcinoma. The pathogenesis is thought to involve a change in the differentiation program of the esophageal mucosal stem cell, with the appearance of columnar cells (intestinal metaplasia) plus goblet cells."
+  },
+  {
+    title:"Gastritis (acute & chronic)",
+    laws:[
+      "Gastritis = inflammation of gastric mucosa; it is a <b>microscopic diagnosis</b>.",
+      "Acute gastritis: neutrophil infiltration. Chronic gastritis: lymphocytic and/or plasma cell infiltration.",
+      "Important because of its link to peptic ulcer and gastric cancer.",
+      "Acute causes: spicy food, alcohol, malnutrition, smoking, bacterial infection (H. pylori, salmonellosis), viral hepatitis, NSAIDs/aspirin/cortisone, severe stress.",
+      "Chronic gastritis: mucosal atrophy and metaplasia; epithelial changes may progress to dysplasia.",
+      "Chronic gastritis causes: recurrent acute gastritis, <b>H. pylori</b> (most important), excessive alcohol, heavy smoking, autoimmune disease.",
+      "Chronic gastritis histology: intestinal metaplasia, atrophy (loss of glands & parietal cells), dysplasia that may progress to carcinoma."
+    ],
+    text:"Gastritis is inflammation of the gastric mucosa and is fundamentally a microscopic diagnosis. There are two types: acute gastritis, marked by neutrophil infiltration, and chronic gastritis, marked by lymphocytic and/or plasma cell infiltration. The condition matters because of its relationship with peptic ulcer and gastric cancer. Acute gastritis is a transient inflammatory process mainly involving the mucosa, driven by diet and habits (spicy food, alcohol, malnutrition, smoking), infections (bacterial, e.g. H. pylori and salmonellosis; viral, e.g. hepatitis), drugs (NSAIDs, aspirin, cortisone), and physical or chemical stress. Chronic gastritis is chronic inflammation with mucosal atrophy and metaplasia, and the epithelial changes may progress to dysplasia. Recurrent attacks of acute gastritis can lead to chronic gastritis, but the dominant cause is H. pylori infection, which damages epithelial cells directly (urease, vacuolating toxin, proteases, phospholipases) and stimulates pro-inflammatory cytokines. Excessive alcohol, heavy smoking, and autoimmune disease are additional causes. Histologically, chronic gastritis shows intestinal metaplasia and atrophy from loss of mucosal glands and parietal cells, with dysplasia that may progress to carcinoma."
+  },
+  {
+    title:"Peptic ulcer: definition & sites",
+    laws:[
+      "An ulcer = a breach in the mucosa extending to the submucosa or deeper (an erosion stays limited to the mucosa).",
+      "Peptic ulcers are areas of degeneration/necrosis of GI mucosa exposed to acid-peptic secretions.",
+      "98–99% occur in the <b>duodenum</b> or the <b>gastric antrum</b> (usually along the lesser curvature).",
+      "Three normal protective mechanisms: protective mucous layer, good blood supply, rapid epithelial turnover."
+    ],
+    text:"An ulcer is defined as a breach in the mucosa of the alimentary tract that extends to the submucosa or deeper; this distinguishes it from an erosion, which is limited to the mucosa and does not extend to the submucosa. Peptic ulcers are areas of degeneration and necrosis of gastrointestinal mucosa exposed to acid-peptic secretions. Though they can occur anywhere exposed to hydrochloric acid and pepsin, 98-99% occur in either the upper duodenum or the stomach (usually the antrum, along the lesser curvature). Normally, three protective mechanisms guard against self-digestion: a protective mucous layer, a good blood supply, and rapid turnover of epithelial cells."
+  },
+  {
+    title:"Peptic ulcer: pathogenesis",
+    laws:[
+      "Ulceration occurs when the balance between mucosal defenses and damaging forces (acid, pepsin) is disrupted.",
+      "H. pylori is present in virtually <b>all</b> duodenal ulcer patients and about <b>70%</b> of gastric ulcer patients.",
+      "H. pylori mechanisms: pro-inflammatory cytokines (IL-8) activating neutrophils; urease converts NH4→NH3 (toxic); proteases and phospholipases damage epithelium directly; enhanced acid secretion + impaired duodenal bicarbonate; platelet-activating factor causes capillary thrombosis.",
+      "Zollinger-Ellison syndrome: a gastrin-secreting tumor (gastrinoma) or islet-cell hyperplasia causes acid hypersecretion and recurrent ulcers.",
+      "NSAIDs suppress mucosal prostaglandin synthesis (via COX inhibition); aspirin is also a direct irritant.",
+      "Corticosteroids block phospholipase A2, upstream of prostaglandin synthesis."
+    ],
+    text:"Mucosal injury and, thus, peptic ulcer occur when the physiological balance between gastric acid secretion and gastro-duodenal mucosal defense is disrupted, allowing back-diffusion of hydrogen ions and epithelial injury. H. pylori infection is a major factor: it is present in virtually all patients with duodenal ulcer and in about 70% of those with gastric ulcer. It acts through several mechanisms — inducing an intense inflammatory and immune response (pro-inflammatory cytokines such as IL-8 activating neutrophils), producing direct cell injury via a vacuolating toxin and urease (which converts ammonium to ammonia, toxic to the mucosa), proteases and phospholipases that damage epithelium directly, enhancing gastric acid secretion while impairing duodenal bicarbonate production (lowering luminal pH), and provoking thrombotic occlusion of surface capillaries via bacterial platelet-activating factor. Other contributing factors include Zollinger-Ellison syndrome, in which a gastrin-secreting tumor (gastrinoma) or islet-cell hyperplasia causes gastric acid hypersecretion and recurrent ulcers, and chronic NSAID use, which suppresses mucosal prostaglandin synthesis by inhibiting cyclooxygenase; aspirin also acts as a direct mucosal irritant. Corticosteroids contribute by inhibiting phospholipase A2, upstream in the same protective pathway."
+  },
+  {
+    title:"Peptic ulcer: symptoms, complications, treatment",
+    laws:[
+      "Most common symptom: <b>burning stomach pain</b>.",
+      "Other symptoms: fullness/bloating/belching, fatty food intolerance, heartburn, nausea. Many patients are asymptomatic.",
+      "Complications: <b>internal bleeding</b> (most common), perforation, penetration, obstruction.",
+      "Treatment: proton pump inhibitors (omeprazole, lansoprazole) and H2-receptor antagonists (famotidine, ranitidine) to slow acid secretion."
+    ],
+    text:"The most common peptic ulcer symptom is burning stomach pain, alongside a feeling of fullness, bloating or belching, intolerance to fatty foods, heartburn, and nausea — though many people with peptic ulcers are entirely asymptomatic. Internal bleeding is the most common complication of stomach ulcers, followed by perforation and by penetration or obstruction. Treatment centers on slowing acid secretion, using proton pump inhibitors such as omeprazole and lansoprazole, and histamine H2-receptor antagonists such as famotidine and ranitidine."
+  },
+  {
+    title:"Malabsorption syndrome",
+    laws:[
+      "Impaired intestinal absorption of nutrients, especially fat (also protein, carbohydrate, vitamins, minerals).",
+      "Most common presentation: chronic diarrhea.",
+      "Hallmark sign: <b>steatorrhea</b> — bulky, frothy, greasy-yellow stools.",
+      "Primary MAS: due to primary deficiency of the absorptive mucosal surface and its enzymes.",
+      "Secondary MAS: mucosal changes secondary to other factors — disease, surgery, trauma, drugs."
+    ],
+    text:"Malabsorption is characterized by impaired intestinal absorption of nutrients, especially fat, along with other substances such as proteins, carbohydrates, vitamins, and minerals. It can affect many organ systems; the most common clinical presentation is chronic diarrhea, and the hallmark of malabsorption is steatorrhea — the passage of abnormally bulky, frothy, greasy-yellow stools. Primary malabsorption syndrome results from a primary deficiency of the absorptive mucosal surface and its associated enzymes, while secondary malabsorption syndrome arises from mucosal changes that are secondary to other factors, such as disease, surgery, trauma, and drugs."
+  },
+  {
+    title:"Celiac disease",
+    laws:[
+      "A chronic disease triggered by eating <b>gluten</b> (gluten-sensitive enteropathy).",
+      "Gluten = a protein in wheat, barley, and other grains.",
+      "Characteristic mucosal lesion of the small intestine with impaired nutrient absorption.",
+      "Improves with <b>withdrawal of gluten</b> from the diet.",
+      "Pathogenesis: gliadin (a gluten component) is broken down by <b>tissue transglutaminase</b>; resulting peptides are recognized by CD4+ T cells (with CD8+ T cells also accumulating), triggering interferon secretion and enterocyte damage.",
+      "Involves interaction of environmental, genetic, and immunologic factors."
+    ],
+    text:"Celiac disease is a chronic disease triggered by eating gluten, also known as gluten-sensitive enteropathy. Gluten is a protein found in wheat, barley, and other grains. There is a characteristic mucosal lesion of the small intestine with impaired nutrient absorption, which improves on withdrawal of wheat gluten from the diet. The pathogenesis involves interaction between environmental, genetic, and immunologic factors: there is sensitivity to a gluten component called gliadin. When the small intestine is exposed to gluten, it accumulates CD8+ and CD4+ T cells; gliadin is broken down by the enzyme tissue transglutaminase into peptides that are recognized by CD4+ T cells, which secrete interferon and lead to damage of the enterocyte."
+  },
+  {
+    title:"Inflammatory bowel disease — overview",
+    laws:[
+      "Two disorders: <b>Crohn's disease (CD)</b> and <b>ulcerative colitis (UC)</b>.",
+      "Both are chronic, inflammatory disorders of obscure (idiopathic) origin.",
+      "Both exhibit extra-intestinal inflammatory manifestations.",
+      "Shared symptoms: diarrhea, rectal bleeding, abdominal pain, fatigue, weight loss.",
+      "Mechanism: disrupted mucosal immune homeostasis → strong immune response against normal flora; epithelial barrier defect lets flora reach intestinal lymphoid tissue.",
+      "CD reflects a TH1 / interferon-gamma delayed-type hypersensitivity response (supported by granulomas). UC reflects excessive TH2 activation."
+    ],
+    text:"The two disorders known as inflammatory bowel disease (IBD) are Crohn's disease and ulcerative colitis. They have distinctly different clinical and pathological features, but both are chronic inflammatory disorders of obscure (idiopathic) origin, and both exhibit extra-intestinal inflammatory manifestations. Both usually present with diarrhea, rectal bleeding, abdominal pain, fatigue, and weight loss. Normally the mucosal immune system is ready to respond to ingested pathogens but stays unresponsive to normal flora; in IBD this homeostasis is disrupted, producing a strong immune response against normal flora, and an epithelial barrier defect lets microflora reach the lymphoid tissue of the intestine. Crohn's disease results from a delayed-type hypersensitivity reaction driven by interferon-gamma-producing TH1 cells, supported by the presence of granulomas in the lesions, while ulcerative colitis is caused by excessive activation of TH2 cells."
+  },
+  {
+    title:"Crohn's disease",
+    laws:[
+      "Autoimmune disease that may affect any part of the GI tract, mouth to anus — most often the distal small intestine and colon.",
+      "Pathology: segmental and <b>transmural</b> inflammation with mucosal damage.",
+      "Non-caseating granulomas and deep fissures → fistula formation.",
+      "Clinically: intermittent attacks of diarrhea, fever, abdominal pain between asymptomatic periods; colonic involvement can cause anemia from blood loss.",
+      "Extra-intestinal manifestations: arthritis, erythema nodosum, renal disorders.",
+      "Treatment: dietary/nutrition therapy, antidiarrheals, 5-ASA and antibiotics (mild/moderate), corticosteroids (severe), drainage of abscess/fistula, surgery."
+    ],
+    text:"Crohn's disease is an autoimmune disease that may affect any portion of the gastrointestinal tract from mouth to anus, but most often involves the distal small intestine and colon. Its pathological features are segmental and transmural involvement by the inflammatory process, with mucosal damage, and the presence of non-caseating granulomas with deep fissures that lead to fistula formation. Clinically it begins with intermittent attacks of diarrhea, fever, and abdominal pain, spaced by asymptomatic periods; in those with colonic involvement, chronic fecal blood loss leads to anemia. Extra-intestinal manifestations include arthritis, erythema nodosum, and renal disorders. Treatment includes dietary management, nutrition therapy (feeding tube or intravenous), antidiarrheals such as loperamide, 5-aminosalicylic acid and antibiotics for mild-to-moderate disease, corticosteroids for severe disease, drainage of abscesses and fistulas with antibiotics, and surgery."
+  },
+  {
+    title:"Ulcerative colitis",
+    laws:[
+      "Chronic ulcero-inflammatory disease limited to the <b>colon and rectum</b>, affecting only mucosa and submucosa.",
+      "Well-formed granulomas are <b>absent</b> (unlike Crohn's).",
+      "A systemic disorder: associated with arthritis, hepatic involvement, and skin lesions.",
+      "Differs pathologically from CD: no granulomas; ulcers rarely extend below submucosa; no mural thickening; <b>higher risk</b> of carcinoma.",
+      "Symptoms: diarrhea (10–20/day), bloody mucous stools, cramping abdominal pain.",
+      "Treatment: broad-spectrum antibiotics and steroids, immunosuppressive agents, surgery, antidiarrheals, aminosalicylates, short courses of steroids, dietary change."
+    ],
+    text:"Ulcerative colitis is a chronic ulcero-inflammatory disease limited to the colon and rectum, affecting only the mucosa and submucosa; well-formed granulomas are absent. It is a systemic disorder associated with arthritis, hepatic involvement, and skin lesions. Pathologically it differs from Crohn's disease in that well-formed granulomas are absent, the mucosal ulcers rarely extend below the submucosa so mural thickening does not occur, and there is a higher risk of carcinoma developing. Symptoms include frequent diarrhea (10 to 20 times a day), bloody mucous stools, and cramping abdominal pain. Treatment includes broad-spectrum antibiotics and steroids, immunosuppressive agents, surgery, antidiarrheal medicines, aminosalicylates to relieve inflammation and maintain remission, short courses of steroid medicines to control active disease, and dietary changes."
+  },
+  {
+    title:"Diverticular disease & intestinal obstruction",
+    laws:[
+      "A diverticulum = a blind pouch of the alimentary tract; most common site: <b>left colon (sigmoid colon)</b>.",
+      "The small intestine is most often obstructed, due to its narrow lumen.",
+      "~80% of obstruction is due to: hernia, adhesions, intussusception, volvulus.",
+      "~20% is due to tumors and infarction.",
+      "Intussusception = one bowel segment telescopes into the next. Volvulus = twisting of a bowel loop causing obstruction and infarction."
+    ],
+    text:"A diverticulum is a blind pouch related to the alimentary tract; the most common site is the left side of the colon, with the majority occurring in the sigmoid colon. Regarding intestinal obstruction, the small intestine is most often involved because of its narrow lumen. About 80% of obstruction is due to hernia (protrusion of a loop of bowel through a weakness in the peritoneal wall, forming a hernia sac), adhesions, intussusception (one part of the bowel sliding into the next like a telescope), and volvulus (twisting of a loop of bowel leading to obstruction and infarction). The remaining roughly 20% is due to tumors and infarction."
+  },
+  {
+    title:"Acute appendicitis",
+    laws:[
+      "The most common acute abdominal surgical emergency.",
+      "Associated with luminal obstruction — usually a <b>fecolith</b>, less commonly a gallstone, tumor, or worms.",
+      "Obstruction compresses draining veins → reduced blood flow → ischemic injury → bacterial proliferation and inflammatory edema.",
+      "Untreated: appendix may burst, releasing bacteria into the abdominal cavity.",
+      "Most serious complication: <b>peritonitis</b>.",
+      "Symptoms: right lower abdominal pain, nausea, vomiting, decreased appetite.",
+      "Treatment: surgical removal (appendectomy); antibiotics may be equally effective in select non-ruptured cases."
+    ],
+    text:"Acute appendicitis is the most common acute abdominal surgical emergency. It is associated with obstruction of the appendiceal lumen — usually by a fecolith, and less commonly by a gallstone, a tumor, or worms — which compresses and obstructs the draining veins, reducing blood flow to the appendix. The resulting ischemic injury favors bacterial proliferation with additional inflammatory edema. If left untreated, the appendix may burst, releasing bacteria into the abdominal cavity and increasing the risk of complications; the most serious complication is peritonitis. Symptoms commonly include right lower abdominal pain, nausea, vomiting, and decreased appetite. Treatment for acute appendicitis is surgical removal of the appendix; surgery reduces the risk of complications or death associated with rupture, though antibiotics may be equally effective in certain cases of non-ruptured appendicitis."
+  }
+];
+
+/* ===================== OVERVIEW RENDER ===================== */
+const lawGrid = document.getElementById('lawGrid');
+topics.forEach(t=>{
+  const card = document.createElement('div');
+  card.className = 'law-card';
+  card.innerHTML = `<h3>${t.title}</h3><ul>${t.laws.map(l=>`<li>${l}</li>`).join('')}</ul>`;
+  lawGrid.appendChild(card);
+});
+
+/* ===================== MINI MAP RENDER ===================== */
+const mmList = document.getElementById('mmList');
+const mmPanel = document.getElementById('mmPanel');
+topics.forEach((t,i)=>{
+  const b = document.createElement('button');
+  b.textContent = t.title;
+  b.addEventListener('click', ()=>{
+    mmList.querySelectorAll('button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    mmPanel.innerHTML = `<h3>${t.title}</h3><p>${t.text}</p>`;
+  });
+  mmList.appendChild(b);
+});
+
+/* ===================== DIAGRAM INTERACTIONS ===================== */
+// balance widget
+document.querySelectorAll('.balance-wrap .chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    const wrap = chip.closest('.diagram-block');
+    wrap.querySelectorAll('.chip').forEach(c=>c.classList.remove('on'));
+    chip.classList.add('on');
+    const box = wrap.querySelector('.reveal-box');
+    box.textContent = chip.dataset.txt;
+  });
+});
+
+// drug flow
+document.querySelectorAll('#drugFlow .node').forEach(node=>{
+  node.addEventListener('click', ()=>{
+    document.getElementById('drugReveal').textContent = node.dataset.t + ' — ' + node.dataset.txt;
+  });
+});
+
+// H. pylori steps
+const hpData = [
+  "H. pylori stimulates mucosal epithelial cells to release pro-inflammatory cytokines such as IL-8, which activate neutrophils that carry out much of the tissue damage.",
+  "Bacterial products injure cells directly: a vacuolating toxin, urease (which converts NH4 to the mucosa-toxic NH3), proteases, and phospholipases that damage the epithelium.",
+  "H. pylori enhances gastric acid secretion while impairing duodenal bicarbonate production, lowering luminal pH and damaging duodenal mucosa.",
+  "Bacterial platelet-activating factor provokes thrombotic occlusion of surface capillaries, and the bacteria themselves adhere to the GI surface."
+];
+const hpSteps = document.querySelectorAll('#hpSteps .step');
+function showHp(i){
+  hpSteps.forEach(s=>s.classList.remove('on'));
+  hpSteps[i].classList.add('on');
+  document.getElementById('hpReveal').textContent = hpData[i];
+}
+hpSteps.forEach(s=>s.addEventListener('click', ()=>showHp(+s.dataset.i)));
+showHp(0);
+
+// Barrett stepper
+const barrettData = [
+  "Chronic gastro-esophageal reflux repeatedly exposes the lower esophagus to acid and bile, injuring the squamous epithelium.",
+  "The stratified squamous epithelium is replaced by columnar epithelium with goblet cells (intestinal metaplasia) — this is Barrett's epithelium itself.",
+  "Ongoing injury drives dysplastic change in the metaplastic epithelium — an intermediate, still-reversible step.",
+  "Dysplasia progresses to carcinoma in situ: malignant cells confined to the epithelium, not yet invasive.",
+  "Invasion follows, producing esophageal adenocarcinoma — the endpoint of the Barrett's sequence."
+];
+const barrettSteps = document.querySelectorAll('#barrettSteps .step');
+function showBarrett(i){
+  barrettSteps.forEach(s=>s.classList.remove('on'));
+  barrettSteps[i].classList.add('on');
+  document.getElementById('barrettReveal').textContent = barrettData[i];
+}
+barrettSteps.forEach(s=>s.addEventListener('click', ()=>showBarrett(+s.dataset.i)));
+showBarrett(0);
+
+// obstruction chips (reuse balance-wrap handler above already covers it since same class)
+
+// CD vs UC table
+const cmpRows = [
+  {feat:"Site", cd:"Mouth to anus (any part of GIT)", uc:"Rectum always involved, may extend to whole colon", note:"Crohn's is discontinuous and can strike anywhere in the tract; UC starts in the rectum and spreads proximally without skipping."},
+  {feat:"Depth of inflammation", cd:"Transmural (all layers)", uc:"Mucosa and submucosa only", note:"This single difference explains why Crohn's forms fistulas and strictures while UC does not."},
+  {feat:"Granulomas", cd:"Non-caseating, in ~50–60% of cases", uc:"Absent", note:"Granulomas reflect the TH1-driven delayed hypersensitivity typical of Crohn's disease."},
+  {feat:"Fistulas", cd:"Common", uc:"Uncommon", note:"Deep transmural fissures in Crohn's disease tunnel through the bowel wall to form fistulas."},
+  {feat:"Fibrosis / wall thickening", cd:"Marked, wall thickened", uc:"Mild, wall stays thin", note:"Transmural inflammation and repeated healing thicken the Crohn's bowel wall; UC spares the deeper layers."},
+  {feat:"Risk of malignant transformation", cd:"Very rare", uc:"About 5%, more common", note:"Long-standing UC carries a clearer, better-established colorectal cancer risk than Crohn's."},
+];
+const cmpBody = document.querySelector('#cmpTable tbody');
+cmpRows.forEach((r,i)=>{
+  const tr = document.createElement('tr');
+  tr.innerHTML = `<td class="feat">${r.feat}</td><td>${r.cd}</td><td>${r.uc}</td>`;
+  tr.addEventListener('click', ()=>{
+    cmpBody.querySelectorAll('tr').forEach(x=>x.classList.remove('on'));
+    tr.classList.add('on');
+    document.getElementById('cmpReveal').textContent = r.note;
+  });
+  cmpBody.appendChild(tr);
+});
+
+/* ===================== FLASHCARDS ===================== */
+const flashcards = [
+  {q:"What is stomatitis?", a:"Inflammation of the mucous membrane of the mouth."},
+  {q:"What is the most common type of oral ulceration?", a:"Aphthous ulcers."},
+  {q:"Give three possible causes of aphthous ulcers.", a:"Emotional stress, allergy, hormonal imbalance (also nutritional deficiency, GI disturbance, trauma)."},
+  {q:"Name the two fungal infections that commonly involve the oral mucosa.", a:"Candidiasis and actinomycosis."},
+  {q:"What is glossitis?", a:"Inflammation of the tongue."},
+  {q:"What is gingivitis?", a:"Inflammation of the gums."},
+  {q:"What is pharyngitis?", a:"Inflammation of the back of the mouth / throat."},
+  {q:"What is the most important cause of esophagitis?", a:"Gastro-esophageal reflux (GERD)."},
+  {q:"Name two normal situations in which reflux can occur without disease.", a:"After heavy meals, and in early pregnancy."},
+  {q:"Name three conditions that predispose to reflux esophagitis.", a:"Sliding hiatus hernia, chronic peptic ulcer, persistent vomiting (also NG intubation, alcohol)."},
+  {q:"What is Barrett's esophagus?", a:"Replacement of the lower esophageal squamous epithelium by columnar epithelium (metaplasia) due to chronic reflux."},
+  {q:"What is the malignant progression sequence in Barrett's esophagus?", a:"Barrett epithelium → dysplasia → carcinoma in situ → esophageal adenocarcinoma."},
+  {q:"Why is Barrett's esophagus clinically important?", a:"It is a premalignant condition."},
+  {q:"How is gastritis diagnosed?", a:"Microscopically — it is a histological diagnosis."},
+  {q:"What inflammatory cell type characterizes acute gastritis?", a:"Neutrophils."},
+  {q:"What inflammatory cell types characterize chronic gastritis?", a:"Lymphocytes and/or plasma cells."},
+  {q:"Name three causes of acute gastritis.", a:"Spicy food, alcohol, NSAIDs (also smoking, H. pylori, severe stress)."},
+  {q:"What is the leading cause of chronic gastritis?", a:"Helicobacter pylori infection."},
+  {q:"What histological changes define chronic gastritis?", a:"Intestinal metaplasia, glandular and parietal cell atrophy, and possible dysplasia."},
+  {q:"How does a peptic ulcer differ from an erosion?", a:"An ulcer extends through the mucosa into the submucosa or deeper; an erosion is limited to the mucosa."},
+  {q:"Where do 98–99% of peptic ulcers occur?", a:"The duodenum or the gastric antrum (lesser curvature)."},
+  {q:"Name the three normal protective mechanisms of the gastric mucosa.", a:"Protective mucous layer, good blood supply, rapid epithelial cell turnover."},
+  {q:"In what percentage of duodenal and gastric ulcer patients is H. pylori found?", a:"Virtually all duodenal ulcer patients; about 70% of gastric ulcer patients."},
+  {q:"How does H. pylori urease damage the mucosa?", a:"It converts urea/ammonium to ammonia, which is toxic to the mucosa."},
+  {q:"What syndrome causes peptic ulcers through a gastrin-secreting tumor?", a:"Zollinger-Ellison syndrome."},
+  {q:"How do NSAIDs cause ulcers?", a:"By inhibiting cyclooxygenase (COX), suppressing protective prostaglandin synthesis."},
+  {q:"How do corticosteroids contribute to ulceration?", a:"They inhibit phospholipase A2, reducing prostaglandin synthesis upstream."},
+  {q:"What is the most common symptom of peptic ulcer?", a:"Burning stomach (epigastric) pain."},
+  {q:"What is the most common complication of peptic ulcer?", a:"Internal bleeding."},
+  {q:"Name two drug classes used to treat peptic ulcer.", a:"Proton pump inhibitors and H2-receptor antagonists."},
+  {q:"What is the hallmark clinical sign of malabsorption syndrome?", a:"Steatorrhea — bulky, frothy, greasy-yellow stools."},
+  {q:"What is the difference between primary and secondary malabsorption?", a:"Primary is due to intrinsic mucosal/enzyme deficiency; secondary is due to other disease, surgery, trauma, or drugs."},
+  {q:"What dietary component triggers celiac disease?", a:"Gluten, specifically its gliadin component."},
+  {q:"What enzyme processes gliadin in celiac disease pathogenesis?", a:"Tissue transglutaminase."},
+  {q:"How is celiac disease treated?", a:"Withdrawal of gluten from the diet."},
+  {q:"Name the two main inflammatory bowel diseases.", a:"Crohn's disease and ulcerative colitis."},
+  {q:"Which T-helper response is associated with Crohn's disease?", a:"TH1, interferon-gamma mediated delayed hypersensitivity."},
+  {q:"Which T-helper response is associated with ulcerative colitis?", a:"TH2."},
+  {q:"What layers of the bowel wall does Crohn's disease affect?", a:"All layers — it is transmural."},
+  {q:"What layers does ulcerative colitis affect?", a:"Only the mucosa and submucosa."},
+  {q:"Which IBD is characterized by non-caseating granulomas?", a:"Crohn's disease."},
+  {q:"Which IBD carries a higher risk of colorectal carcinoma?", a:"Ulcerative colitis."},
+  {q:"Where is Crohn's disease most commonly located?", a:"It can affect mouth to anus, but most commonly the distal small intestine and colon."},
+  {q:"What GI segment is always involved in ulcerative colitis?", a:"The rectum."},
+  {q:"What is the most common site of diverticular disease?", a:"The left colon, mostly the sigmoid colon."},
+  {q:"Which part of the intestine is most often obstructed, and why?", a:"The small intestine, because of its narrow lumen."},
+  {q:"Name the four common mechanical causes of small intestinal obstruction.", a:"Hernia, adhesions, intussusception, volvulus."},
+  {q:"What is intussusception?", a:"One segment of bowel telescoping into the adjacent segment."},
+  {q:"What is volvulus?", a:"Twisting of a loop of bowel, which can cause obstruction and infarction."},
+  {q:"What is the most common cause of luminal obstruction in acute appendicitis?", a:"A fecolith."},
+  {q:"What is the most serious complication of untreated appendicitis?", a:"Peritonitis, following rupture."},
+  {q:"What are the classic symptoms of acute appendicitis?", a:"Right lower quadrant pain, nausea, vomiting, decreased appetite."},
+  {q:"What is the standard treatment for acute appendicitis?", a:"Surgical removal of the appendix (appendectomy)."}
+];
+
+const fcGrid = document.getElementById('fcGrid');
+const fcCount = document.getElementById('fcCount');
+function renderCards(list){
+  fcGrid.innerHTML = '';
+  list.forEach((c,i)=>{
+    const card = document.createElement('div');
+    card.className = 'fc-card';
+    card.innerHTML = `
+      <div class="fc-inner">
+        <div class="fc-face fc-front"><span class="tag">Q${i+1}</span>${c.q}</div>
+        <div class="fc-face fc-back">${c.a}</div>
+      </div>`;
+    card.addEventListener('click', ()=>card.classList.toggle('flipped'));
+    fcGrid.appendChild(card);
+  });
+  fcCount.textContent = list.length + ' cards';
+}
+renderCards(flashcards);
+document.getElementById('shuffleBtn').addEventListener('click', ()=>{
+  const shuffled = [...flashcards].sort(()=>Math.random()-0.5);
+  renderCards(shuffled);
+});
+document.getElementById('flipAllBtn').addEventListener('click', ()=>{
+  document.querySelectorAll('.fc-card').forEach(c=>c.classList.toggle('flipped'));
+});
+
+/* ===================== QUIZ ===================== */
+const quizData = [
+  {q:"What is the commonest form of oral ulceration?", correct:"Aphthous ulcers", wrong:["Herpetic stomatitis","Leukoplakia","Candidiasis"]},
+  {q:"Inflammation of the tongue is called:", correct:"Glossitis", wrong:["Gingivitis","Pharyngitis","Stomatitis"]},
+  {q:"Which fungal infections commonly involve the oral mucosa?", correct:"Candidiasis and actinomycosis", wrong:["Aspergillosis and mucormycosis","Histoplasmosis and blastomycosis","Cryptococcosis and sporotrichosis"]},
+  {q:"The most important cause of esophagitis is:", correct:"Gastro-esophageal reflux", wrong:["Viral infection","Fungal infection","Trauma"]},
+  {q:"Gastro-esophageal reflux can occur physiologically in which situation?", correct:"After heavy meals", wrong:["During fasting","After exercise","During sleep only"]},
+  {q:"Barrett's esophagus is characterized by:", correct:"Columnar metaplasia of the lower esophagus", wrong:["Squamous metaplasia","Loss of all epithelium","Granuloma formation"]},
+  {q:"The malignant end-point of Barrett's esophagus is:", correct:"Esophageal adenocarcinoma", wrong:["Squamous cell carcinoma","Lymphoma","Sarcoma"]},
+  {q:"Gastritis is fundamentally diagnosed by:", correct:"Microscopic (histological) examination", wrong:["Endoscopy alone","Clinical symptoms","Blood tests"]},
+  {q:"Acute gastritis is characterized histologically by infiltration of:", correct:"Neutrophils", wrong:["Lymphocytes","Eosinophils","Plasma cells"]},
+  {q:"Chronic gastritis is characterized histologically by infiltration of:", correct:"Lymphocytes and/or plasma cells", wrong:["Neutrophils only","Basophils","Mast cells"]},
+  {q:"The most common cause of chronic gastritis is:", correct:"Helicobacter pylori infection", wrong:["NSAID use","Viral hepatitis","Alcohol alone"]},
+  {q:"Which of these is NOT a histological feature of chronic gastritis?", correct:"Non-caseating granuloma", wrong:["Intestinal metaplasia","Mucosal gland atrophy","Possible dysplasia"]},
+  {q:"A peptic ulcer differs from an erosion because it:", correct:"Extends into or beyond the submucosa", wrong:["Is smaller than 1 cm","Never bleeds","Only affects the esophagus"]},
+  {q:"Peptic ulcers occur most commonly in:", correct:"The duodenum and gastric antrum", wrong:["The jejunum","The ileum","The cecum"]},
+  {q:"Which of the following is NOT a normal gastric mucosal protective mechanism?", correct:"High acid secretion", wrong:["Protective mucous layer","Good blood supply","Rapid epithelial turnover"]},
+  {q:"H. pylori is found in what proportion of duodenal ulcer patients?", correct:"Virtually all", wrong:["About 10%","About 30%","Never present"]},
+  {q:"H. pylori urease converts urea into a substance toxic to the mucosa. What is it?", correct:"Ammonia", wrong:["Hydrogen peroxide","Lactic acid","Nitric oxide"]},
+  {q:"Zollinger-Ellison syndrome causes peptic ulcers through:", correct:"A gastrin-secreting tumor causing acid hypersecretion", wrong:["Excess pepsin alone","Bile reflux","Reduced blood supply"]},
+  {q:"NSAIDs promote ulcer formation mainly by:", correct:"Inhibiting cyclooxygenase and prostaglandin synthesis", wrong:["Increasing mucus production","Increasing bicarbonate secretion","Killing H. pylori"]},
+  {q:"Corticosteroids contribute to peptic ulceration by inhibiting:", correct:"Phospholipase A2", wrong:["Cyclooxygenase","Gastrin release","Pepsinogen activation"]},
+  {q:"The most common symptom of peptic ulcer disease is:", correct:"Burning stomach pain", wrong:["Jaundice","Dysphagia","Constipation"]},
+  {q:"The most common complication of peptic ulcer is:", correct:"Internal bleeding", wrong:["Perforation","Obstruction","Fistula formation"]},
+  {q:"Which drug class reduces gastric acid secretion by blocking the proton pump?", correct:"Proton pump inhibitors", wrong:["H2-receptor antagonists","Antacids","Antibiotics"]},
+  {q:"The hallmark clinical feature of malabsorption syndrome is:", correct:"Steatorrhea", wrong:["Constipation","Hematemesis","Jaundice"]},
+  {q:"Secondary malabsorption syndrome results from:", correct:"Diseases, surgery, trauma, or drugs", wrong:["Primary enzyme deficiency only","Genetic mutation only","Idiopathic causes only"]},
+  {q:"Celiac disease is triggered by which dietary component?", correct:"Gluten (gliadin)", wrong:["Lactose","Fructose","Casein"]},
+  {q:"In celiac disease, gliadin peptides are processed by which enzyme before immune recognition?", correct:"Tissue transglutaminase", wrong:["Pepsin","Amylase","Lipase"]},
+  {q:"Which T-cell response predominates in Crohn's disease pathogenesis?", correct:"TH1 / interferon-gamma", wrong:["TH2","TH17 only","Regulatory T cells only"]},
+  {q:"Which T-cell response predominates in ulcerative colitis pathogenesis?", correct:"TH2", wrong:["TH1","TH9","Cytotoxic T cells only"]},
+  {q:"Crohn's disease characteristically involves:", correct:"All layers of the bowel wall (transmural)", wrong:["Only the rectum","Only the mucosa","Only the serosa"]},
+  {q:"Ulcerative colitis characteristically involves:", correct:"Mucosa and submucosa only", wrong:["Transmural inflammation","Only the small intestine","Skip lesions throughout the GIT"]},
+  {q:"Non-caseating granulomas are a hallmark of:", correct:"Crohn's disease", wrong:["Ulcerative colitis","Celiac disease","Gastritis"]},
+  {q:"Which IBD carries a higher risk of malignant transformation?", correct:"Ulcerative colitis", wrong:["Crohn's disease","Both equally","Neither"]},
+  {q:"The rectum is almost always involved in:", correct:"Ulcerative colitis", wrong:["Crohn's disease","Celiac disease","Diverticular disease"]},
+  {q:"The most common site for diverticular disease is:", correct:"Sigmoid colon (left colon)", wrong:["Cecum","Transverse colon","Duodenum"]},
+  {q:"The small intestine is the most common site of obstruction because of its:", correct:"Narrow lumen", wrong:["Long length","Thick wall","Rich blood supply"]},
+  {q:"Twisting of a bowel loop leading to obstruction and infarction is called:", correct:"Volvulus", wrong:["Intussusception","Diverticulitis","Stricture"]},
+  {q:"Telescoping of one bowel segment into another is called:", correct:"Intussusception", wrong:["Volvulus","Herniation","Adhesion"]},
+  {q:"The most common cause of luminal obstruction in acute appendicitis is:", correct:"A fecolith", wrong:["A gallstone","A tumor","Parasitic worms"]},
+  {q:"The most serious complication of untreated acute appendicitis is:", correct:"Peritonitis", wrong:["Diarrhea","Malabsorption","Gastritis"]},
+  {q:"Classic symptoms of acute appendicitis include:", correct:"Right lower abdominal pain, nausea, vomiting", wrong:["Left upper quadrant pain and constipation","Jaundice and pruritus","Dysphagia and heartburn"]},
+  {q:"The standard treatment for acute appendicitis is:", correct:"Surgical removal of the appendix", wrong:["Antibiotics only, always","Dietary modification","Proton pump inhibitors"]}
+];
+
+let score = 0;
+document.getElementById('scoreTotal').textContent = quizData.length;
+
+function shuffleArr(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+function buildQuiz(){
+  score = 0;
+  document.getElementById('scoreVal').textContent = score;
+  const list = document.getElementById('quizList');
+  list.innerHTML = '';
+  quizData.forEach((item,idx)=>{
+    const options = shuffleArr([item.correct, ...item.wrong]);
+    const q = document.createElement('div');
+    q.className = 'q-item';
+    q.innerHTML = `
+      <div class="q-head"><span class="q-num">Q${idx+1}</span><span class="q-text">${item.q}</span></div>
+      <div class="q-opts"></div>`;
+    const optsWrap = q.querySelector('.q-opts');
+    options.forEach(optText=>{
+      const b = document.createElement('button');
+      b.className = 'q-opt';
+      b.textContent = optText;
+      b.addEventListener('click', ()=>{
+        optsWrap.querySelectorAll('.q-opt').forEach(o=>o.disabled = true);
+        if(optText === item.correct){
+          b.classList.add('correct');
+          score++;
+        } else {
+          b.classList.add('wrong');
+          optsWrap.querySelectorAll('.q-opt').forEach(o=>{
+            if(o.textContent === item.correct) o.classList.add('correct');
+          });
+        }
+        document.getElementById('scoreVal').textContent = score;
+      });
+      optsWrap.appendChild(b);
+    });
+    list.appendChild(q);
+  });
+}
+buildQuiz();
+document.getElementById('resetQuizBtn').addEventListener('click', buildQuiz);
+</script>
+</body>
+</html>
